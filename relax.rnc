@@ -1,0 +1,37 @@
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+start = element article {
+    attribute magazine { text },
+    attribute type { "sport" | "beauté" | "business" },
+    attribute annee { xsd:gYear },
+    element titre {
+        attribute couleur { "noir" | "rouge" | "bleu" },
+        xsd:string {
+            minLength = "10"
+            maxLength = "50" }
+    },
+    element soustitre? {
+        xsd:string {
+            minLength = "11"
+            maxLength = "49" }
+    },
+    element paragraphe+ {
+        element phrase+ { text }
+    },
+    element image {
+        source,
+        attribute date { xsd:date }
+    },
+    (element source {
+        src,
+        annee
+    }
+    & element auteur {
+        element nom { text },
+        element prenom { text }
+    })
+
+}
+
+src = attribute src { xsd:anyURI }
+annee = attribute annee { xsd:gYear }
